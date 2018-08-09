@@ -8,9 +8,7 @@ box-sizing: border-box;
 body {
 font-family: "IM Fell English", Georgia, Times, serif;
 font-size: 20px;
-background-color: #d0c5b1;
-background-image: url("../images/paper.jpg");
-background-size: 60%;
+background-color: tan;
 }
 
 /* //////////////// */
@@ -37,6 +35,7 @@ h1 {
         overflow: auto;
         width: 60%;
         height: 700px;
+        padding: 15px 5px;
       }
       #notes {
         float: right;
@@ -63,10 +62,31 @@ h1 {
         border-radius: 5px;
       }
 
-      .headline {
-        font-family: 'IM Fell English SC';
-        cursor: pointer;
-      }   
+      .article-html {
+        padding: 10px;
+        margin: 10px;
+        background-color: #d0c5b1;
+        background-image: url("../images/paper.jpg");
+        background-size: 60%;
+        transform: rotate(0deg);
+        -webkit-box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
+-moz-box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
+box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
+      }
+
+      .article-html p{
+        margin: 3px;
+      }
+        .article-html .headline {
+          font-family: 'IM Fell English SC';
+          cursor: pointer;
+          font-size: 24px;
+          font-weight: bold;
+        }
+        .article-html .summary {
+          font-size: 18px;
+          line-height: 1em;
+        }
 
       /* NOTES */
       #notes #titleinput,

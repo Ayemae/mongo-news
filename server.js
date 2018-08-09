@@ -53,14 +53,14 @@ app.get("/scrape", function (req, res) {
         .children("a")
         .attr("href");
       result.summary = $(this)
-        .children("p.summary")
-        .text();
+      .children(".summary")
+      .text();
 
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
         .then(function (dbArticle) {
           // View the added result in the console
-          console.log(dbArticle);
+          //console.log(dbArticle);
         })
         .catch(function (err) {
           // If an error occurred, send it to the client
