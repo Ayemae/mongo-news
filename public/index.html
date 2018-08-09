@@ -3,20 +3,30 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+    crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./styles/main.css">
   <title>News Clippings</title>
 </head>
 
 <body>
   <div id="wrapper">
-    <header>
-      <h1>News Clippings</h1>
-      <a class="clip-btn" href="/scrape"><i class="fas fa-cut"></i> Click to clip articles</a>
-    </header>
 
-    <div id="articles"></div>
-    <div id="notes"></div>
+    <section class="left-content">
+      <header>
+        <h1>News Clippings</h1>
+        <a class="clip-btn" href="/scrape">
+          <i class="fas fa-cut"></i> Click to clip articles</a>
+      </header>
+
+      <div id="articles"></div>
+    </section>
+    <section class="right-content">
+
+      <div id="new-note"></div>
+      <div id="notes"></div>
+
+    </section>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="app.js"></script>

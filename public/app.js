@@ -5,11 +5,18 @@ $.getJSON("/articles", function (data) {
     // Display the apropos information on the page
     var randRot = Math.floor(Math.random() * 7) - 3;
     var newArticle = $(`<div class="article-html" data-id="${data[i]._id}">`).css(`transform`, `rotate(${randRot}deg)`);
-    $("#articles").prepend(
-      newArticle.html(
-        `<p class="headline"> <a href="${data[i].link}" target="_blank">${data[i].title}</a> <i class="far fa-comment-dots"></i> </p>
+    if (data[i].summary) {
+      $("#articles").append(
+        newArticle.html(
+          `<p class="headline"> <a href="${data[i].link}" target="_blank">${data[i].title}</a></p>
     <p class="summary">${data[i].summary}</p>`)
-    );
+      );
+    }else {
+      $("#articles").append(
+        newArticle.html(
+          `<p class="headline"> <a href="${data[i].link}" target="_blank">${data[i].title}</a></p>`)
+      );
+    }
   }
 });
 
@@ -17,7 +24,7 @@ $.getJSON("/articles", function (data) {
 // Whenever someone clicks a p tag
 $(document).on("click", ".article-html", function () {
   // Empty the notes from the note section
-  $("#notes").empty();
+  $("#new-note").empty();
   // Save the id from the p tag
   var thisId = $(this).attr("data-id");
 
@@ -30,20 +37,18 @@ $(document).on("click", ".article-html", function () {
     .then(function (data) {
       console.log(data);
       // The title of the article
-      $("#notes").append("<h2>" + data.title + "</h2>");
+      $("#new-note").append("<div class='note-header'><h2>" + data.title + "</h2></div>");
       // An input to enter a new title
-      $("#notes").append("<input id='titleinput' name='title' >");
+      $("#new-note").append("<input id='titleinput' name='title' >");
       // A textarea to add a new note body
-      $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+      $("#new-note").append("<textarea id='bodyinput' name='body'></textarea>");
       // A button to submit a new note, with the id of the article saved to it
-      $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+      $("#new-note").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
 
       // If there's a note in the article
       if (data.note) {
-        // Place the title of the note in the title input
-        $("#titleinput").val(data.note.title);
-        // Place the body of the note in the body textarea
-        $("#bodyinput").val(data.note.body);
+        data.findAll({note}), function (error, dbnotes) {
+        $("#notes").prepend(`<div class="prevnote"><h3>${dbnotes.title}</h3><p>${dbnotes.body}</div>`);}
       }
     });
 });
@@ -69,7 +74,7 @@ $(document).on("click", "#savenote", function () {
       // Log the response
       console.log(data);
       // Empty the notes section
-      $("#notes").empty();
+      $("#new-note").empty();
     });
 
   // Also, remove the values entered in the input and textarea for note entry

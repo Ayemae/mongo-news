@@ -8,7 +8,10 @@ box-sizing: border-box;
 body {
 font-family: "IM Fell English", Georgia, Times, serif;
 font-size: 20px;
-background-color: tan;
+background-color: #d98841;
+background-image: url("../images/table.jpg");
+background-size: cover;
+background-repeat: no-repeat;
 }
 
 /* //////////////// */
@@ -24,35 +27,32 @@ h1 {
     font-family: /*"Diplomata SC",*/ Impact;
     font-weight: normal;
 }
+h2 {
+  font-family: 'IM Fell English SC';
+}
+
+header h1 {
+  margin: 8px 0 15px;
+}
 
   #wrapper {
     width: 960px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 10px auto;
+    display: flex;
+    }
+
+    .left-content {
+      background-color: rgba(255, 255, 255, .8);
+    border-radius: 7px;
+    padding: 20px;
+    width: 60%;
     }
       #articles {
         display: inline-block;
         overflow: auto;
-        width: 60%;
-        height: 700px;
         padding: 15px 5px;
-      }
-      #notes {
-        float: right;
-        width: 30%;
-      }
-      textarea, input {
-        display: block;
-        width: 100%;
-        background-color: #FCF5C7;
-      }
-      input {
-        height: 36px;
-        font-size: 24px;
-      }
-      textarea {
-        height: 200px;
-        font-size: 18px;
+        margin-top: 10px;
+        height: 700px;
       }
 
       .clip-btn {
@@ -72,6 +72,7 @@ h1 {
         -webkit-box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
 -moz-box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
 box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
+        cursor: pointer;
       }
 
       .article-html p{
@@ -79,7 +80,6 @@ box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
       }
         .article-html .headline {
           font-family: 'IM Fell English SC';
-          cursor: pointer;
           font-size: 24px;
           font-weight: bold;
         }
@@ -88,9 +88,51 @@ box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
           line-height: 1em;
         }
 
+        .article-html .headline a:hover {
+          color: rgba(0, 0, 0, 0.65);
+        }
+
       /* NOTES */
-      #notes #titleinput,
-      #notes #bodyinput {
+        .right-content {
+          display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 30%;
+        }
+
+      #new-note #titleinput,
+      #new-note #bodyinput {
         font-family: 'Shadows Into Light';
         letter-spacing: 2px;
+      }
+
+      #new-note {
+        float: right;
+        padding: 20px;
+      }
+
+      #notes{
+        
+      }
+      .note-header {
+        text-align: center;
+        padding: 20px;
+      }
+
+      .note-header h2 {
+        background-color: rgba(255, 255, 255, .65);
+        border-radius: 7px;
+      }
+      textarea, input {
+        display: block;
+        width: 100%;
+        background-color: #FCF5C7;
+      }
+      input {
+        height: 36px;
+        font-size: 24px;
+      }
+      textarea {
+        height: 200px;
+        font-size: 18px;
       }

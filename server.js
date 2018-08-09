@@ -61,7 +61,7 @@ app.get("/scrape", function (req, res) {
       db.Article.create(result)
         .then(function (dbArticle) {
           // View the added result in the console
-          //console.log(dbArticle);
+          console.log(dbArticle);
         })
         .catch(function (err) {
           // If an error occurred, send it to the client
@@ -83,17 +83,16 @@ app.get("/articles", function (req, res) {
   });
 });
 
-// Route for grabbing a specific Article by id, populate it with it's note
+// Route for grabbing a specific Article by id, populate it with its notes
 app.get("/articles/:id", function (req, res) {
-  // TODO
-  // ====
-  // Finish the route so it finds one article using the req.params.id,
+  // Route finds one article using the req.params.id,
   // and run the populate method with "note",
   // then responds with the article with the note included
   db.Article.findOne({
     _id: req.params.id
-  }).populate("note").then(function (article) {
-    res.json(article);
+  }).populate("note")
+  .then(function (dbnote) {
+    res.json(dbnote);
   })
     .catch(function (err) {
       console.log(err);
