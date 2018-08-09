@@ -1,12 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Diplomata+SC|IM+Fell+English');
+@import url('https://fonts.googleapis.com/css?family=IM+Fell+English+SC|IM+Fell+English');
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
 
 * {
 box-sizing: border-box;
 }
 
 body {
-font-family: "IM Fell English", "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 18px;
+font-family: "IM Fell English", Georgia, Times, serif;
+font-size: 20px;
 background-color: #d0c5b1;
 background-image: url("../images/paper.jpg");
 background-size: 60%;
@@ -17,7 +18,7 @@ background-size: 60%;
 /* //////////////// */
 
 a {
-    color: darkblue;
+    color: black;
     text-decoration: none;
 }
 
@@ -30,7 +31,6 @@ h1 {
     width: 960px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 5%;
     }
       #articles {
         display: inline-block;
@@ -54,4 +54,23 @@ h1 {
       textarea {
         height: 200px;
         font-size: 18px;
+      }
+
+      .clip-btn {
+        color: #fff;
+        background-color: darkblue;
+        padding: 5px 12px;
+        border-radius: 5px;
+      }
+
+      .headline {
+        font-family: 'IM Fell English SC';
+        cursor: pointer;
+      }   
+
+      /* NOTES */
+      #notes #titleinput,
+      #notes #bodyinput {
+        font-family: 'Shadows Into Light';
+        letter-spacing: 2px;
       }
