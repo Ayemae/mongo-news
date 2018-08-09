@@ -72,6 +72,7 @@ app.get("/scrape", function (req, res) {
     // If we were able to successfully scrape and save an Article, send a message to the client
     res.send("Clipping complete");
   });
+  res.redirect("/");
 });
 
 // Route for getting all Articles from the db
