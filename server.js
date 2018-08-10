@@ -107,24 +107,46 @@ app.post("/articles/:id", function (req, res) {
   // save the new note that gets posted to the Notes collection
   // then find an article from the req.params.id
   // and update its "note" property with the _id of the new note
+  db.Note.create(req.body)
+    .then(function (dbNote) {
 
-  db.Article.findOne({ _id: req.params.id }).then(function (dbArticle) {
-    console.log("**********************************************")
-    console.log(dbArticle.note);
-    var noteArray = dbArticle.note;
+      return db.Article.findOneAndUpdate({ _id: req.params.id },
+        { $push: { note: dbNote } }, { new: true })
+    }).then(function (updatedArticle) {
 
-    db.Note.create(req.body)
-      .then(function (dbNote) {
-        noteArray.push(dbNote._id)
-        console.log(noteArray);
-        return db.Article.findOneAndUpdate({ _id: req.params.id },
-          { note: noteArray }, { new: true })
-      }).then(function (updatedArticle) {
+      res.json(updatedArticle)
+    });
 
-        res.json(updatedArticle)
-      });
+});
+
+//FOR DELETING NOTES
+app.get("/note", function (req, res) {
+  // TODO: Finish the route so it grabs all of the articles
+  db.Note.find({}).then(function (data) {
+    res.json(data)
   });
 });
+app.get("/note/:id", function (req, res) {
+  // Route finds one note using the req.params.id
+  db.Article.findOne({
+    _id: req.params.id
+  }).then(function (dbNote) {
+    res.json(dbNote);
+  })
+    .catch(function (err) {
+      console.log(err);
+    });
+});
+
+app.post("/note/:id", function (req, res) {
+  db.Note.deleteOne({ _id: req.params.id }).then(function (notesDoc) {
+    }).then(function () {
+        res.redirect("/");
+      });
+  
+});
+//END NOTE DELETE STUFF
+
 // Start the server
 app.listen(PORT, function () {
   console.log("App running on port " + PORT + "!");

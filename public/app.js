@@ -6,13 +6,13 @@ $.getJSON("/articles", function (data) {
     var randRot = Math.floor(Math.random() * 7) - 3;
     var newArticle = $(`<div class="article-html" data-id="${data[i]._id}">`).css(`transform`, `rotate(${randRot}deg)`);
     if (data[i].summary) {
-      $("#articles").append(
+      $("#articles").prepend(
         newArticle.html(
           `<p class="headline"> <a href="${data[i].link}" target="_blank">${data[i].title}</a></p>
     <p class="summary">${data[i].summary}</p>`)
       );
     }else {
-      $("#articles").append(
+      $("#articles").prepend(
         newArticle.html(
           `<p class="headline"> <a href="${data[i].link}" target="_blank">${data[i].title}</a></p>`)
       );
@@ -27,7 +27,7 @@ $(document).on("click", ".article-html", function () {
   $("#new-note").empty();
   $("#notes").empty();
   // Save the id from the p tag
-  var thisId = $(this).attr("data-id");
+  let thisId = $(this).attr("data-id");
 
   // Now make an ajax call for the Article
   $.ajax({
@@ -50,11 +50,29 @@ $(document).on("click", ".article-html", function () {
       // If there's a note in the article
       if (data.note) {
         for (var i = 0; i < data.note.length; i++) {
-        $("#notes").prepend(`<div class="prevnote"><h3>${data.note[i].title}</h3><p>${data.note[i].body}</div> 
-        <div class="delete-btn" data-id="${data.note[i]._id}"><i class="fa fa-trash" aria-hidden="true"></i></div>`);}
+        $("#notes").prepend(`
+        <div class="prevnote">
+          <h3>${data.note[i].title}</h3><p>${data.note[i].body}
+          <div class="delete-btn" data-id="${data.note[i]._id}"><i class="fa fa-trash" aria-hidden="true"></i></div>
+        </div> 
+        `);}
       }
     });
 });
+
+
+// DELETE BUTTON STUFF
+$(document).on("click", ".delete-btn", function () {
+  let thisId = $(this).attr("data-id");
+  $.ajax({
+    method: "POST",
+    url: "/note/" + thisId,
+  })
+    .then(function (data) {
+      location.reload();
+    })
+});
+// END DELETE BUTTON STUFF
 
 // When you click the savenote button
 $(document).on("click", "#savenote", function () {
