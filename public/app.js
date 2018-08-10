@@ -25,6 +25,7 @@ $.getJSON("/articles", function (data) {
 $(document).on("click", ".article-html", function () {
   // Empty the notes from the note section
   $("#new-note").empty();
+  $("#notes").empty();
   // Save the id from the p tag
   var thisId = $(this).attr("data-id");
 
@@ -45,10 +46,12 @@ $(document).on("click", ".article-html", function () {
       // A button to submit a new note, with the id of the article saved to it
       $("#new-note").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
 
+      console.log(data.note);
       // If there's a note in the article
       if (data.note) {
-        data.findAll({note}), function (error, dbnotes) {
-        $("#notes").prepend(`<div class="prevnote"><h3>${dbnotes.title}</h3><p>${dbnotes.body}</div>`);}
+        for (var i = 0; i < data.note.length; i++) {
+        $("#notes").prepend(`<div class="prevnote"><h3>${data.note[i].title}</h3><p>${data.note[i].body}</div> 
+        <div class="delete-btn" data-id="${data.note[i]._id}"><i class="fa fa-trash" aria-hidden="true"></i></div>`);}
       }
     });
 });

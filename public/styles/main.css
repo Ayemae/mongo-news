@@ -98,7 +98,14 @@ box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
         justify-content: center;
         flex-wrap: wrap;
         width: 30%;
+        height: 850px;
+        overflow: auto;
+        padding: 20px
         }
+
+        .right-content::-webkit-scrollbar { 
+          display: none; 
+      }
 
       #new-note #titleinput,
       #new-note #bodyinput {
@@ -108,11 +115,25 @@ box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
 
       #new-note {
         float: right;
-        padding: 20px;
+        margin-bottom: 12px;
       }
 
       #notes{
         
+      }
+
+      .prevnote {
+        font-family: 'Shadows Into Light';
+        letter-spacing: 2px;
+        display: inline-block;
+        width: 100%;
+        background-color: #FCF5C7;
+        margin-bottom: 10px;
+        -webkit-box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
+-moz-box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
+box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
+padding: 0 12px;
+position: relative;
       }
       .note-header {
         text-align: center;
@@ -135,4 +156,15 @@ box-shadow: 2px 3px 7px 0px rgba(30,24,64,.65);
       textarea {
         height: 200px;
         font-size: 18px;
+      }
+
+      .delete-btn {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .delete-btn:hover {
+        color: darkred;
       }

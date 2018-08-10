@@ -54,8 +54,8 @@ app.get("/scrape", function (req, res) {
         .children("a")
         .attr("href");
       result.summary = $(this)
-      .children(".summary")
-      .text();
+        .children(".summary")
+        .text();
 
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
@@ -91,10 +91,10 @@ app.get("/articles/:id", function (req, res) {
   db.Article.findOne({
     _id: req.params.id
   }).populate("note")
-  .then(function (articleAndNote) {
-    res.json(articleAndNote);
-    console.log(articleAndNote)
-  })
+    .then(function (articleAndNote) {
+      res.json(articleAndNote);
+      console.log(articleAndNote)
+    })
     .catch(function (err) {
       console.log(err);
     });
@@ -107,16 +107,24 @@ app.post("/articles/:id", function (req, res) {
   // save the new note that gets posted to the Notes collection
   // then find an article from the req.params.id
   // and update its "note" property with the _id of the new note
-  db.Note.create(req.body)
-    .then(function (dbNote) {
-      return db.Article.findOneAndUpdate({ _id: req.params.id },
-        { note: dbNote._id }, { new: true })
-    }).then(function (updatedArticle) {
 
-      res.json(updatedArticle)
-    });
+  db.Article.findOne({ _id: req.params.id }).then(function (dbArticle) {
+    console.log("**********************************************")
+    console.log(dbArticle.note);
+    var noteArray = dbArticle.note;
+
+    db.Note.create(req.body)
+      .then(function (dbNote) {
+        noteArray.push(dbNote._id)
+        console.log(noteArray);
+        return db.Article.findOneAndUpdate({ _id: req.params.id },
+          { note: noteArray }, { new: true })
+      }).then(function (updatedArticle) {
+
+        res.json(updatedArticle)
+      });
+  });
 });
-
 // Start the server
 app.listen(PORT, function () {
   console.log("App running on port " + PORT + "!");
